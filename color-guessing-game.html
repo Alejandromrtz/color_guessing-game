@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Guessing Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="carded">
+    <div class="card_container">
+            <h1 class="title"> Color Guessing Game</h1>
+            <button   button class="button1" type="button" onclick="runGame()">Let's start guessing</button>
+    </div>
+</div>
+    <script>
+        //                     0       1        2       3       4       5           6       7       8       9           
+        const colorArray = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow' ];
+
+        
+
+
+        function runGame() {
+            let guess = " ";
+            let correct = false;
+            // const targetIndex = Math.floor(Math.random()*colorArray.length) + 1;
+            const targetIndex = Math.floor(Math.random()*colorArray.length)
+            const target = colorArray[targetIndex];
+            let numTries = 0;
+            console.log('Answer is:', target);
+            do{
+                guess = prompt('I am thinking of one of these colors:\n\n'+ colorArray.join(", ") +
+                '\n\nWhat color am I thinking of?\n');
+                if (guess === null) {
+                    alert('Game Canceled');
+                    return;
+                }
+                correct = checkGuess(guess,target);
+                numTries += 1;
+                console.log(numTries);
+            } while (!correct);
+            document.body.style.background = guess;
+
+            alert('Congrats! you guessed: ' + target);
+            alert('it took you: '+ numTries + " attempt/s");
+        }
+
+
+        function checkGuess(guess, target){
+            let correct = false;
+
+            if (!colorArray.includes(guess) ) {
+                alert("Not a valid color");
+            }else if (guess > target) {
+                alert('its a bit lower')
+            } else if(guess < target){
+                alert('its a bit higher')
+            } else {
+                correct = true;
+                
+            }
+            return correct;
+            
+        }
+
+    </script>
+</body>
+</html>
